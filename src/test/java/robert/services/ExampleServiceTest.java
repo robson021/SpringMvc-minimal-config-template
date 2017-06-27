@@ -1,4 +1,4 @@
-package robert.tests.services;
+package robert.services;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;

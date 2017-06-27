@@ -1,4 +1,4 @@
-package robert.tests.controllers;
+package robert.web.controllers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -7,7 +7,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import robert.tests.services.ExampleService;
+import robert.services.ExampleService;
 import robert.tools.MvcTest;
 
 public class TestControllerTest extends MvcTest {

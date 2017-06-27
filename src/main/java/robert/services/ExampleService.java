@@ -1,4 +1,4 @@
-package robert.tests.services;
+package robert.services;
 
 import org.springframework.stereotype.Service;
 
