@@ -7,6 +7,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import robert.db.repo.UserRepository;
 import robert.services.ExampleService;
 import robert.tools.MvcTest;
 
@@ -14,6 +15,9 @@ public class TestControllerTest extends MvcTest {
 
 	@Autowired
 	private ExampleService exampleService;
+
+	@Autowired
+	private UserRepository userRepository;
 
 	@Test
 	public void hello() throws Exception {
@@ -29,6 +33,6 @@ public class TestControllerTest extends MvcTest {
 
 	@Override
 	protected Object getController() {
-		return new TestController(exampleService);
+		return new TestController(exampleService, userRepository);
 	}
 }

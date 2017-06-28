@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import robert.db.entities.User;
+import robert.db.repo.UserRepository;
 import robert.services.ExampleService;
 
 @RestController
@@ -16,13 +18,21 @@ public class TestController {
 
 	private final ExampleService exampleService;
 
-	public TestController(ExampleService exampleService) {
+	private final UserRepository userRepository;
+
+	public TestController(ExampleService exampleService, UserRepository userRepository) {
 		this.exampleService = exampleService;
+		this.userRepository = userRepository;
 	}
 
 	@GetMapping("/hello")
 	public String hello() {
 		log.debug(exampleService.saySomething());
 		return "Hello World!";
+	}
+
+	@GetMapping("/users")
+	public Iterable<User> getUsers() {
+		return userRepository.findAll();
 	}
 }

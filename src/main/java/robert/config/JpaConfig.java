@@ -5,7 +5,6 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import org.h2.server.web.WebServlet;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -32,6 +31,7 @@ public class JpaConfig {
 		dataSourceConfig.setJdbcUrl(env.getRequiredProperty("db.url"));
 		dataSourceConfig.setUsername(env.getRequiredProperty("db.username"));
 		dataSourceConfig.setPassword(env.getRequiredProperty("db.password"));
+		dataSourceConfig.setMaximumPoolSize(Integer.parseInt(env.getRequiredProperty("db.max-pool-size")));
 
 		return new HikariDataSource(dataSourceConfig);
 	}
