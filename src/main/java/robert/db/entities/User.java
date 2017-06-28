@@ -3,12 +3,15 @@ package robert.db.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User extends BaseEntity {
 
 	@Column(nullable = false)
 	private String email;
 
+	@JsonIgnore
 	@Column(nullable = false)
 	private String password;
 

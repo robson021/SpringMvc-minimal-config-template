@@ -1,11 +1,13 @@
 package robert.db;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import robert.db.entities.User;
 import robert.db.repo.UserRepository;
 
 @Component
+@Profile("dev")
 public class DevSettings {
 
 	private final UserRepository userRepository;
