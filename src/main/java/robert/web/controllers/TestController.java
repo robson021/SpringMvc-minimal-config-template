@@ -5,13 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import robert.db.entities.User;
 import robert.db.repo.UserRepository;
 import robert.services.ExampleService;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("test")
 public class TestController {
 
 	private static final Logger log = LoggerFactory.getLogger(TestController.class);
@@ -25,13 +24,13 @@ public class TestController {
 		this.userRepository = userRepository;
 	}
 
-	@GetMapping("/hello")
+	@GetMapping("hello")
 	public String hello() {
 		log.debug(exampleService.saySomething());
 		return "Hello World!";
 	}
 
-	@GetMapping("/users")
+	@GetMapping("users")
 	public Iterable<User> getUsers() {
 		return userRepository.findAll();
 	}
