@@ -2,6 +2,7 @@ package robert.config;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,59 +17,62 @@ import robert.db.repo.UserRepository;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserRepository userRepository;
+	private final UserRepository userRepository;
 
-    public UserDetailsServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+	public UserDetailsServiceImpl(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userRepository.findOneByEmail(s);
-        return new UserDetailsImpl(user);
-    }
+	@Override
+	public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+		User user = userRepository.findOneByEmail(s);
+		return new UserDetailsImpl(user);
+	}
 
-    private class UserDetailsImpl implements UserDetails {
+	private class UserDetailsImpl implements UserDetails {
 
-        private final User user;
+		private final User user;
 
-        UserDetailsImpl(User user) {
-            this.user = user;
-        }
+		private final Set<GrantedAuthority> roles;
 
-        @Override
-        public Collection<? extends GrantedAuthority> getAuthorities() {
-            return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
-        }
+		UserDetailsImpl(User user) {
+			this.user = user;
+			this.roles = Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+		}
 
-        @Override
-        public String getPassword() {
-            return this.user.getPassword();
-        }
+		@Override
+		public Collection<? extends GrantedAuthority> getAuthorities() {
+			return this.roles;
+		}
 
-        @Override
-        public String getUsername() {
-            return this.user.getEmail();
-        }
+		@Override
+		public String getPassword() {
+			return this.user.getPassword();
+		}
 
-        @Override
-        public boolean isAccountNonExpired() {
-            return true;
-        }
+		@Override
+		public String getUsername() {
+			return this.user.getEmail();
+		}
 
-        @Override
-        public boolean isAccountNonLocked() {
-            return true;
-        }
+		@Override
+		public boolean isAccountNonExpired() {
+			return true;
+		}
 
-        @Override
-        public boolean isCredentialsNonExpired() {
-            return true;
-        }
+		@Override
+		public boolean isAccountNonLocked() {
+			return true;
+		}
 
-        @Override
-        public boolean isEnabled() {
-            return true;
-        }
-    }
+		@Override
+		public boolean isCredentialsNonExpired() {
+			return true;
+		}
+
+		@Override
+		public boolean isEnabled() {
+			return true;
+		}
+	}
 }
