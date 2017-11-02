@@ -23,18 +23,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .anyRequest()
-                .authenticated()
-
-                .and()
-                .formLogin().permitAll()
-
+                .anyRequest().authenticated()
+                .and().formLogin().permitAll()
                 .and().csrf().disable()
-                .headers()
-                .cacheControl();
+                .headers().cacheControl();
 
-        http.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.NEVER);
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER);
     }
 
     @Override
