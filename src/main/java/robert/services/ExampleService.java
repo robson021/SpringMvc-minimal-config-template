@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExampleService {
 
-	public String saySomething() {
-		return "something...";
-	}
+    public String saySomething() {
+        return "something...";
+    }
 }
